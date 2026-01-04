@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		489502872F09544400BAE102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 489502802F09544400BAE102 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		48069C7A2F020FAE002E3005 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,22 +31,13 @@
 		48069C6A2F020FAA002E3005 /* ANA Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ANA Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48069C792F020FAE002E3005 /* ANA BetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ANA BetaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48069C832F020FAE002E3005 /* ANA BetaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ANA BetaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		489502802F09544400BAE102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		48069C6C2F020FAA002E3005 /* ANA Beta */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "ANA Beta";
-			sourceTree = "<group>";
-		};
-		48069C7C2F020FAE002E3005 /* ANA BetaTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ANA BetaTests";
-			sourceTree = "<group>";
-		};
-		48069C862F020FAE002E3005 /* ANA BetaUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ANA BetaUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +70,8 @@
 		48069C612F020FAA002E3005 = {
 			isa = PBXGroup;
 			children = (
+				489502802F09544400BAE102 /* Assets.xcassets */,
 				48069C6C2F020FAA002E3005 /* ANA Beta */,
-				48069C7C2F020FAE002E3005 /* ANA BetaTests */,
-				48069C862F020FAE002E3005 /* ANA BetaUITests */,
 				48069C6B2F020FAA002E3005 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +124,6 @@
 			dependencies = (
 				48069C7B2F020FAE002E3005 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				48069C7C2F020FAE002E3005 /* ANA BetaTests */,
-			);
 			name = "ANA BetaTests";
 			packageProductDependencies = (
 			);
@@ -152,9 +143,6 @@
 			);
 			dependencies = (
 				48069C852F020FAE002E3005 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				48069C862F020FAE002E3005 /* ANA BetaUITests */,
 			);
 			name = "ANA BetaUITests";
 			packageProductDependencies = (
@@ -212,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489502872F09544400BAE102 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

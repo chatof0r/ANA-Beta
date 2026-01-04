@@ -1,32 +1,15 @@
-//
-//  ANA_BetaApp.swift
-//  ANA Beta
-//
-//  Created by Arthur Roche on 29/12/2025.
-//
-
 import SwiftUI
 import SwiftData
 
 @main
 struct ANA_BetaApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    // On crée le moteur ici pour toute l'application
+    @StateObject var cardManager = CardManager()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(cardManager) // On injecte le moteur ici
         }
-        .modelContainer(sharedModelContainer)
     }
 }

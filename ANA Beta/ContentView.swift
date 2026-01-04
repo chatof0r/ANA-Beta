@@ -1,61 +1,28 @@
-//
-//  ContentView.swift
-//  ANA Beta
-//
-//  Created by Arthur Roche on 29/12/2025.
-//
-
 import SwiftUI
-import SwiftData
 
+// MARK: - GESTIONNAIRE D'ONGLETS
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var selectedTab = 0
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        TabView(selection: $selectedTab) {
+            
+            // On appelle simplement les structures des autres fichiers
+            HomeView()
+                .tabItem {
+                    Label("Accueil", systemImage: "house.fill")
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .tag(0)
+            
+            LibraryView()
+                .tabItem {
+                    Label("Librairie", systemImage: "books.vertical.fill")
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+                .tag(1)
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+        .tint(.white) // Couleur de l'onglet actif
     }
 }
-
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
