@@ -3,9 +3,10 @@ import SwiftUI
 struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") var hasCompletedOnboarding: Bool = false
     @AppStorage("userFirstName") var userFirstName: String = ""
+    @AppStorage("studyLevel") var userstudyLevel: String = "P1/L1"
     
     @State private var firstName: String = ""
-    @State private var studyLevel: String = ""
+    // La variable locale @State studyLevel a été supprimée pour utiliser directement l'AppStorage
     @State private var showLevelPicker = false
     
     let levels = ["P1/L1", "P2", "D1"]
@@ -71,10 +72,7 @@ struct OnboardingView: View {
                             .font(.headline)
                             .foregroundColor(.white.opacity(0.7))
                         
-                        Picker("Niveau", selection: $studyLevel) {
-                            if studyLevel.isEmpty {
-                                Text("Sélectionne ton année").tag("")
-                            }
+                        Picker("Niveau", selection: $userstudyLevel) {
                             ForEach(levels, id: \.self) { level in
                                 Text(level).tag(level)
                             }
@@ -84,7 +82,7 @@ struct OnboardingView: View {
                         .frame(height: 120)
                         
                         Button(action: {
-                            if !studyLevel.isEmpty {
+                            if !firstName.isEmpty {
                                 self.userFirstName = self.firstName
                                 withAnimation(.spring()) {
                                     hasCompletedOnboarding = true
@@ -94,12 +92,11 @@ struct OnboardingView: View {
                             Text("Commencer")
                                 .font(.system(size: 18, weight: .bold))
                                 .frame(width: 150, height: 50)
-                                .background(studyLevel.isEmpty ? Color.gray.opacity(0.2) : Color.white)
-                                .foregroundColor(studyLevel.isEmpty ? .gray : customBackground)
+                                .background(Color.white)
+                                .foregroundColor(customBackground)
                                 .cornerRadius(25)
-                                .shadow(color: .white.opacity(studyLevel.isEmpty ? 0 : 0.4), radius: 10)
+                                .shadow(color: .white.opacity(0.4), radius: 10)
                         }
-                        .disabled(studyLevel.isEmpty)
                         .padding(.top, 10)
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -114,8 +111,4 @@ struct OnboardingView: View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-}
-
-#Preview {
-    OnboardingView()
 }
