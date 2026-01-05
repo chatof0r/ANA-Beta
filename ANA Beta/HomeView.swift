@@ -135,6 +135,10 @@ struct HomeView: View {
                             Divider().background(.white.opacity(0.3))
                         }
                         
+              
+                        ActivityCard()
+                            .padding(.bottom, 10)
+                        
                         NavigationLink(destination: Text("Page The Spine")) {
                             HStack(spacing: 15) {
                                 Image(systemName: "square.grid.2x2.fill")
@@ -160,4 +164,8 @@ struct HomeView: View {
             }
         }
     }
+}
+
+#Preview {
+    HomeView()
 }
