@@ -1,108 +1,118 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    // MARK: - DONNÉES DU PROFIL
+    @AppStorage("hasCompletedOnboarding") var hasCompletedOnboarding: Bool = false
+    @AppStorage("userFirstName") var userFirstName: String = ""
+    
     @State private var firstName: String = ""
-    @State private var studyLevel: String = "L1 (Première année)"
-    @State private var semesterEndDate: Date = Date()
+    @State private var studyLevel: String = ""
+    @State private var showLevelPicker = false
     
-    // Pour fermer l'onboarding quand c'est fini
-    @State private var currentStep = 0
-    
-    let levels = ["L1", "L2", "L3", "Master 1", "Master 2", "PASS/LAS", "Autre"]
+    let levels = ["P1/L1", "P2", "D1"]
     let customBackground = Color(red: 22/255, green: 21/255, blue: 29/255)
     
     var body: some View {
         ZStack {
             customBackground.ignoresSafeArea()
             
-            TabView(selection: $currentStep) {
-                // ÉTAPE 1 : PRÉNOM
-                VStack(spacing: 30) {
-                    Text("Comment t'appelles-tu ?")
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                    
-                    TextField("Ton prénom", text: $firstName)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 15).fill(.white.opacity(0.1)))
-                        .foregroundColor(.white)
-                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.3), lineWidth: 1))
-                        .padding(.horizontal, 40)
-                    
-                    nextButton(step: 1)
-                }
-                .tag(0)
+            VStack(spacing: 60) {
+                Spacer()
                 
-                // ÉTAPE 2 : NIVEAU D'ÉTUDES
-                VStack(spacing: 30) {
-                    Text("Quel est ton niveau d'études ?")
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                    
-                    Picker("Niveau", selection: $studyLevel) {
-                        ForEach(levels, id: \.self) { level in
-                            Text(level).tag(level)
+                // --- SECTION 1 : PRÉNOM ---
+                ZStack(alignment: .trailing) {
+                    TextField("", text: Binding(
+                        get: { self.firstName },
+                        set: { newValue in
+                            if let first = newValue.first {
+                                self.firstName = first.uppercased() + newValue.dropFirst()
+                            } else {
+                                self.firstName = newValue
+                            }
                         }
-                    }
-                    .pickerStyle(.wheel)
-                    .frame(height: 150)
-                    .padding()
-                    
-                    nextButton(step: 2)
-                }
-                .tag(1)
-                
-                // ÉTAPE 3 : FIN DU SEMESTRE
-                VStack(spacing: 30) {
-                    Text("Quand se termine ton semestre ?")
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                    
-                    DatePicker("", selection: $semesterEndDate, displayedComponents: .date)
-                        .datePickerStyle(.graphical)
-                        .colorScheme(.dark) // Force le calendrier en mode sombre
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 20).fill(.white.opacity(0.05)))
-                        .padding(.horizontal, 20)
+                    ), prompt: Text("Ton prénom").foregroundColor(.white.opacity(0.3)))
+                    .padding(.leading, 25)
+                    .padding(.trailing, 60)
+                    .frame(height: 70)
+                    .background(RoundedRectangle(cornerRadius: 35).fill(Color.white.opacity(0.05)))
+                    .overlay(RoundedRectangle(cornerRadius: 35).stroke(Color.white.opacity(0.2), lineWidth: 1))
+                    .foregroundColor(.white)
+                    .font(.title2.bold())
+                    .tint(.white)
                     
                     Button(action: {
-                        print("Profil créé : \(firstName), \(studyLevel), \(semesterEndDate)")
-                        // Ici tu pourras plus tard enregistrer les données
+                        if firstName.count >= 3 {
+                            hideKeyboard()
+                            withAnimation(.spring()) {
+                                showLevelPicker = true
+                            }
+                        }
                     }) {
-                        Text("Terminer")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 55)
+                        ZStack {
+                            Circle()
+                                .fill(firstName.count >= 3 ? Color.white : Color.gray.opacity(0.2))
+                                .frame(width: 45, height: 45)
+                                .shadow(color: .white.opacity(firstName.count >= 3 ? 0.5 : 0), radius: 10)
+                            
+                            Image(systemName: "arrow.down")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(firstName.count >= 3 ? customBackground : .gray.opacity(0.5))
+                        }
                     }
-                    .buttonStyle(GlassButtonStyle())
-                    .padding(.horizontal, 40)
+                    .padding(.trailing, 12)
+                    .disabled(firstName.count < 3 || showLevelPicker)
+                    .opacity(showLevelPicker ? 0 : 1)
                 }
-                .tag(2)
+                .padding(.horizontal, 30)
+                
+                // --- SECTION 2 : NIVEAU ---
+                if showLevelPicker {
+                    VStack(spacing: 10) {
+                        Text("En quelle année es-tu ?")
+                            .font(.headline)
+                            .foregroundColor(.white.opacity(0.7))
+                        
+                        Picker("Niveau", selection: $studyLevel) {
+                            if studyLevel.isEmpty {
+                                Text("Sélectionne ton année").tag("")
+                            }
+                            ForEach(levels, id: \.self) { level in
+                                Text(level).tag(level)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .colorScheme(.dark)
+                        .frame(height: 120)
+                        
+                        Button(action: {
+                            if !studyLevel.isEmpty {
+                                self.userFirstName = self.firstName
+                                withAnimation(.spring()) {
+                                    hasCompletedOnboarding = true
+                                }
+                            }
+                        }) {
+                            Text("Commencer")
+                                .font(.system(size: 18, weight: .bold))
+                                .frame(width: 150, height: 50)
+                                .background(studyLevel.isEmpty ? Color.gray.opacity(0.2) : Color.white)
+                                .foregroundColor(studyLevel.isEmpty ? .gray : customBackground)
+                                .cornerRadius(25)
+                                .shadow(color: .white.opacity(studyLevel.isEmpty ? 0 : 0.4), radius: 10)
+                        }
+                        .disabled(studyLevel.isEmpty)
+                        .padding(.top, 10)
+                    }
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                
+                Spacer()
+                Spacer()
             }
-            .tabViewStyle(.page(indexDisplayMode: .always)) // Affiche les petits points en bas
         }
     }
     
-    // Fonction pour le bouton suivant
-    func nextButton(step: Int) -> some View {
-        Button(action: {
-            withAnimation {
-                currentStep = step
-            }
-        }) {
-            Text("Suivant")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-        }
-        .buttonStyle(GlassButtonStyle())
-        .padding(.horizontal, 40)
-        .disabled(step == 1 && firstName.isEmpty) // Désactive si le prénom est vide
-        .opacity(step == 1 && firstName.isEmpty ? 0.5 : 1)
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

@@ -1,3 +1,11 @@
+//
+//  GlassButtonStyle.swift
+//  ANA Beta
+//
+//  Created by Arthur Roche on 05/01/2026.
+//
+
+
 import SwiftUI
 
 // Un seul endroit pour gérer le look de tes boutons

@@ -1,15 +1,20 @@
 import SwiftUI
-import SwiftData
 
 @main
 struct ANA_BetaApp: App {
-    // On crée le moteur ici pour toute l'application
-    @StateObject var cardManager = CardManager()
-
+    // Cette variable surveille si l'utilisateur a fini son profil
+    // Elle est sauvegardée sur le téléphone sous le nom "hasCompletedOnboarding"
+    @AppStorage("hasCompletedOnboarding") var hasCompletedOnboarding: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(cardManager) // On injecte le moteur ici
+            if hasCompletedOnboarding {
+                // Si le profil est créé, on va directement à l'accueil
+                ContentView()
+            } else {
+                // Sinon, on affiche la page de création de profil
+                OnboardingView()
+            }
         }
     }
 }
