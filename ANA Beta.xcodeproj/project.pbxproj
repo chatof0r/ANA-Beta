@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484900772F1D878F002033F4 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 484900762F1D878F002033F4 /* GoogleGenerativeAI */; };
 		489502872F09544400BAE102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 489502802F09544400BAE102 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +35,22 @@
 		489502802F09544400BAE102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		484900562F1D8437002033F4 /* Exceptions for "ANA Beta" folder in "ANA BetaUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AIManager.swift,
+			);
+			target = 48069C822F020FAE002E3005 /* ANA BetaUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		48069C6C2F020FAA002E3005 /* ANA Beta */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				484900562F1D8437002033F4 /* Exceptions for "ANA Beta" folder in "ANA BetaUITests" target */,
+			);
 			path = "ANA Beta";
 			sourceTree = "<group>";
 		};
@@ -47,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				484900772F1D878F002033F4 /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +87,7 @@
 			children = (
 				489502802F09544400BAE102 /* Assets.xcassets */,
 				48069C6C2F020FAA002E3005 /* ANA Beta */,
+				484900352F0C609B002033F4 /* Frameworks */,
 				48069C6B2F020FAA002E3005 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +100,13 @@
 				48069C832F020FAE002E3005 /* ANA BetaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		484900352F0C609B002033F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,6 +129,7 @@
 			);
 			name = "ANA Beta";
 			packageProductDependencies = (
+				484900762F1D878F002033F4 /* GoogleGenerativeAI */,
 			);
 			productName = "ANA Beta";
 			productReference = 48069C6A2F020FAA002E3005 /* ANA Beta.app */;
@@ -183,6 +207,9 @@
 			);
 			mainGroup = 48069C612F020FAA002E3005;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				484900752F1D878F002033F4 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 48069C6B2F020FAA002E3005 /* Products */;
 			projectDirPath = "";
@@ -563,6 +590,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		484900752F1D878F002033F4 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		484900762F1D878F002033F4 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 484900752F1D878F002033F4 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48069C622F020FAA002E3005 /* Project object */;
 }

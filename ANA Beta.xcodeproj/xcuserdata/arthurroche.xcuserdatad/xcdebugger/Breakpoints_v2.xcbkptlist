@@ -3,4 +3,52 @@
    uuid = "64ECDCC1-E7BB-49E9-B85C-4C15715D13CD"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5B6C91E4-F62F-4474-A913-11D728940F8A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ANA Beta/StreakManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "validateDailyFlashcards()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5B6C91E4-F62F-4474-A913-11D728940F8A - 51155d0936283f39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ANA_Beta.StreakManager.validateDailyFlashcards() -&gt; ()"
+                  moduleName = "ANA Beta.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arthurroche/Desktop/ANA-Beta/ANA%20Beta/ANA%20Beta/StreakManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34">
+               </Location>
+               <Location
+                  uuid = "5B6C91E4-F62F-4474-A913-11D728940F8A - 51155d0936283f39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ANA_Beta.StreakManager.validateDailyFlashcards() -&gt; ()"
+                  moduleName = "ANA Beta.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arthurroche/Desktop/ANA-Beta/ANA%20Beta/ANA%20Beta/StreakManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
